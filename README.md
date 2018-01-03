@@ -23,6 +23,7 @@ docker-compose up -d
 ```bash
 docker exec -ti admin_php-apache_1 sh -c "sed -i -- 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/public/g' /etc/apache2/sites-available/default-ssl.conf && sed -i -- 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/public/g' /etc/apache2/sites-available/000-default.conf && sed -i -- 's/<Directory \/var\/www\/html\/>/<Directory \/var\/www\/html\/public\/>/g' /etc/apache2/apache2.conf"
 ```
+
 ### Enable pdo and pdo_mysql extensions
 ```bash
 docker exec -ti admin_php-apache_1 docker-php-ext-install pdo pdo_mysql
