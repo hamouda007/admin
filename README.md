@@ -17,14 +17,15 @@ You must have installed [docker](https://docs.docker.com/engine/installation/) (
 ```bash
 docker-compose up -d
 ```
-### Configuring a Web Server to run Symfony 4
 
+### Configuring a Web Server to run Symfony 4
 
 ```bash
 docker exec -ti admin_php-apache_1 sh -c "sed -i -- 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/public/g' /etc/apache2/sites-available/default-ssl.conf && sed -i -- 's/DocumentRoot \/var\/www\/html/DocumentRoot \/var\/www\/html\/public/g' /etc/apache2/sites-available/000-default.conf && sed -i -- 's/<Directory \/var\/www\/html\/>/<Directory \/var\/www\/html\/public\/>/g' /etc/apache2/apache2.conf"
 ```
 
 ### Enable pdo and pdo_mysql extensions
+
 ```bash
 docker exec -ti admin_php-apache_1 docker-php-ext-install pdo pdo_mysql
 
@@ -62,4 +63,9 @@ docker-compose down
 
 ```bash
 docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) composer create-project symfony/skeleton admin
+```
+
+### EasyAdminBundle (You don't need execute this command)
+```bash
+docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) composer require admin
 ```
