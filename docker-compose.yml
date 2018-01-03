@@ -1,0 +1,46 @@
+version: '3.2'
+
+services:
+  php-apache:
+    image: php:7.1-apache
+    ports:
+      - "8080:80"
+    env_file: .env
+    volumes:
+      - .:/var/www/html
+    networks:
+      admin:
+        ipv4_address: 172.16.1.100
+
+  mysql:
+    image: mysql:5.6
+    ports:
+      - "6033:3306"
+    env_file: .env
+    volumes:
+      - ./.mysqldata:/var/lib/mysql
+    networks:
+      admin:
+        ipv4_address: 172.16.1.101
+
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin:4.7
+      ports:
+        - "8888:80"
+      env_file: .env
+      links:
+        - mysql:db
+      networks:
+        admin:
+          ipv4_address: 172.16.1.102
+
+networks:
+  admin:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
+
+volumes:
+  .mysqldata:
+    driver: local
