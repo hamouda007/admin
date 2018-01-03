@@ -5,5 +5,4 @@
 /vendor/
 ###< symfony/framework-bundle ###
 .mysqldata/
-.env
 .idea/
